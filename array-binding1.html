@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            #container{
+                width:80%;
+                margin:auto;
+                display:grid;
+                grid-template-columns: auto auto auto auto;
+                color:orange;
+                font-size:35px;
+            }
+
+        </style>
+        <script>
+            let booklist = ['html', 'css', 'javascript', 'bootstrap', 'react'];
+            const getBook = () =>{
+                let bookdata = "";
+                booklist.map((bookName, index)=>{
+                    bookdata = bookdata + "<p>" + bookName + " <br/> <button onclick=delbook("+ index +")> Delete </button> </p>";
+                })
+                document.getElementById("container").innerHTML = bookdata;
+            }
+
+           const delbook = (index) =>{
+                let userWish = confirm("Are Sure to Delete ?");
+                if( userWish == true )
+                {
+                    booklist.splice(index, 1);
+                    getBook(); // reload the list after delete
+                }
+           } 
+
+            const save = () =>{
+                let bookname = document.getElementById("bname").value; // take value from textbox
+                booklist.unshift(bookname); // add new element in begning of array 
+                booklist.push(bookname); // add new element at end of array
+                alert(bookname + " Added Successfully !");
+                document.getElementById("bname").value=""; // to clear textbox
+                getBook(); // to read the list after add new element
+            }
+        </script>
+    </head>
+    <body onload="getBook()">
+        <h1 align="center"> Array Add, List, Delete Using JavaScript </h1>
+        
+        <div align="center">
+            Enter Book Name : <input type="text" id="bname" size="40"/>
+            <button onclick="save()"> Save Book </button>
+        </div>
+
+        <section id="container"></section>
+    </body>
+</html>
